@@ -13,16 +13,20 @@ var field = document.querySelectorAll("#form-user-create [name]");
 
 var user = {};
 
-field.forEach(function (field, index) {
-  if (field.name == "gender") {
-    if (field.checked) {
-      user[field.name] = field.value
-    }
-  } else {
-    user[field.name] = field.value
-  }
+document
+  .getElementById("form-user-create")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  // console.log(field.id, field.name, field.value, field.checked, index)
-});
+    field.forEach(function (field, index) {
+      if (field.name == "gender") {
+        if (field.checked) {
+          user[field.name] = field.value;
+        }
+      } else {
+        user[field.name] = field.value;
+      }
+    });
 
-console.log(user)
+    console.log(user);
+  });
