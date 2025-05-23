@@ -3,8 +3,9 @@ var field = document.querySelectorAll("#form-user-create [name]");
 var user = {};
 
 function addLine(dataUser) {
-  var tr = document.createElement("tr");
-  tr.innerHTML = `
+  console.log(dataUser);
+
+  document.getElementById("table-users").innerHTML = `
     <tr>
         <td>
             <img
@@ -33,8 +34,6 @@ function addLine(dataUser) {
             </td>
         </tr>
     `;
-
-    document.getElementById('table-users').appendChild(tr);
 }
 
 document
@@ -52,5 +51,16 @@ document
       }
     });
 
-    addLine(user);
+    var objectUser = new User(
+      user.name,
+      user.gender,
+      user.birth,
+      user.country,
+      user.email,
+      user.password,
+      user.photo,
+      user.admin
+    );
+
+    addLine(objectUser);
   });
