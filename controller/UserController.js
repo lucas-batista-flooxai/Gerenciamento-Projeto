@@ -41,7 +41,7 @@ class UserController {
       .querySelector("#box-user-update .btn-cancel")
       .addEventListener("click", (e) => {});
 
-      this.showPanelCreate();
+    this.showPanelCreate();
   };
 
   getPhoto() {
@@ -130,9 +130,23 @@ class UserController {
         `;
 
     tr.querySelector(".btn-edit").addEventListener("click", (e) => {
-      console.log(JSON.parse(tr.dataset.user));
-      
-      this.showPanelUpdate()
+      let json = JSON.parse(tr.dataset.user);
+
+      let form = document.querySelector("#form-user-update");
+
+      for (let name in json) {
+        let field = form.querySelector("[name=" + name.replace("_", "") + "]");
+
+        console.log(field);
+
+        if (field) {
+          if (field.type == "file") continue;
+
+          field.value = json[name];
+        }
+      }
+
+      this.showPanelUpdate();
     });
 
     this.tableEl.appendChild(tr);
